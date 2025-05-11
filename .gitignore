@@ -1,0 +1,14 @@
+# config files
+.env
+
+# Mac DS_Store
+.DS_Store
+
+# Output files
+generations/*
+output_win_rate_figs/*
+output_elo_figs/*
+elo_rating/*
+
+# command file
+command
