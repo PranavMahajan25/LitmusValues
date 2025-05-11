@@ -2,8 +2,8 @@ import argparse
 import concurrent.futures
 import os
 
-import anthropic
 import pandas as pd
+from anthropic import Anthropic
 from datasets import load_dataset
 from openai import OpenAI
 from tqdm import tqdm
@@ -40,12 +40,12 @@ if api_provider == 'openai':
     client = OpenAI(api_key=api_key)
 
 elif api_provider == 'anthropic':
-    client = anthropic.Anthropic(api_key=api_key)
+    client = Anthropic(api_key=api_key)
 
 elif api_provider == 'togetherai':
     client = OpenAI(
-    api_key=api_key,
-    base_url="https://api.together.xyz/v1",
+        api_key=api_key,
+        base_url="https://api.together.xyz/v1",
     )
 
 elif api_provider == 'xai':
@@ -61,26 +61,20 @@ elif api_provider == 'openrouter':
     )
 
 def collect_response(model, user_prompt, api_provider):
+    message_prompts = [{"role": "user", "content": user_prompt}]
+
+    params = {
+        "model": model,
+        "messages": message_prompts,
+        "temperature": 0,
+        "top_p": 0.01, # top_p 0 throws errors for some api_providers
+        "max_tokens": 5,
+    }
+
     if api_provider in ['openai', 'openrouter', 'togetherai', 'xai']:
-        message_prompts = []
-        message_prompts.append({"role": "user", "content": user_prompt})
-        completion = client.chat.completions.create(
-            model=model,
-            messages=message_prompts,
-            temperature=0,
-            top_p=0,
-            max_tokens=5
-        )
+        completion = client.chat.completions.create(**params)
         return completion.choices[0].message.content
     elif api_provider == 'anthropic':
-        message_prompts = [{"role": "user", "content": user_prompt}]
-        params = {
-            "model": model,
-            "messages": message_prompts,
-            "temperature": 0,
-            "top_p": 0,
-            "max_tokens": 5,
-        }
         completion = client.messages.create(**params)
         return completion.content[0].text
 
@@ -107,7 +101,7 @@ def clean_function(col_before):
     else:
         return 'NA' 
 
-df = load_dataset("kellycyy/AIRiskDilemmas", split='test')
+df = load_dataset("kellycyy/AIRiskDilemmas", "model_eval", split='test')
 
 if debug:
     df = df.select(range(10))
@@ -122,11 +116,8 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=PARALLEL) as executor:
         if idx % 2 == 0:
             futures.append(executor.submit(process_row_pair, row, row_2, idx, idx_2))
     for future in tqdm(concurrent.futures.as_completed(futures), total=len(futures)):
-        try:
-            row1_result, row2_result = future.result()
-            results.extend([row1_result, row2_result])
-        except Exception as e:
-            print(f"Error processing row pair: {e}")
+        row1_result, row2_result = future.result()
+        results.extend([row1_result, row2_result])
 
 filtered_results = sorted(results, key=lambda x: x['idx'])
 
