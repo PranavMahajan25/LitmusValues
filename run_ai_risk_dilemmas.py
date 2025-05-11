@@ -60,20 +60,15 @@ elif api_provider == 'openrouter':
         base_url="https://openrouter.ai/api/v1"
     )
 
-def collect_response(model, user_prompt, api_provider, system_prompt=None):
-    if api_provider == 'openai' or api_provider == 'togetherai' or api_provider == 'xai' or api_provider == 'openrouter':
+def collect_response(model, user_prompt, api_provider):
+    if api_provider in ['openai', 'openrouter', 'togetherai', 'xai']:
         message_prompts = []
-        if system_prompt:
-            if api_provider == 'openai':
-                message_prompts.append({"role": "developer", "content": system_prompt})
-            elif api_provider == 'togetherai' or api_provider == 'xai':
-                message_prompts.append({"role": "system", "content": system_prompt})
         message_prompts.append({"role": "user", "content": user_prompt})
         completion = client.chat.completions.create(
             model=model,
             messages=message_prompts,
             temperature=0,
-            top_p=0.01,
+            top_p=0,
             max_tokens=5
         )
         return completion.choices[0].message.content
@@ -86,8 +81,6 @@ def collect_response(model, user_prompt, api_provider, system_prompt=None):
             "top_p": 0,
             "max_tokens": 5,
         }
-        if system_prompt is not None:
-            params['system'] = system_prompt
         completion = client.messages.create(**params)
         return completion.content[0].text
 

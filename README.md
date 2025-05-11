@@ -15,13 +15,13 @@
 - `--api_provider, -ap` (required): Choose from `openai`, `anthropic`, `togetherai`, `xai`, or `openrouter`.
 - `--api_key, -ak` (required): API key for the selected provider.
 - `--model, -m` (required): Name of the model to use.
-- `--generations_dir, -g` (required): Directory to save output generations. Default is `generations`.
+- `--generations_dir, -g` (optional): Directory to save output generations. Default is `generations`.
 - `--num_parallel_request, -n` (optional): Number of parallel requests to make. Default is `1`.
 - `--debug, -d` (optional): Run in debug mode with only 5 examples.
 
 ### Example:
 ```bash
-python run_generation.py --api_provider openai --model gpt-4o --api_key sk-...
+python run_ai_risk_dilemmas.py --api_provider openai --model gpt-4o --api_key sk-...
 ```
 
 ## Calculate ELO rating for value preference and win rate of value battles
