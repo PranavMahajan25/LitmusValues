@@ -1,5 +1,5 @@
 # LitmusValues: An Evaluation Pipeline to Reveal AI Value Preference
-
+## **Link:** [Paper](https://arxiv.org/abs/2505.14633) | [HuggingFace Data](https://huggingface.co/datasets/kellycyy/AIRiskDilemmas)
 ![Concept image](img/concept.png)
 
 ## Pre-requisites
@@ -50,4 +50,18 @@ python calculate_elo_rating.py --model gpt-4o
 ### Example:
 ```bash
 python visualize_elo_rating.py --model gpt-4o 
+```
+
+If you find this code useful, please cite the following works
+
+```bibtex
+@misc{chiu2025aitellliessave,
+      title={Will AI Tell Lies to Save Sick Children? Litmus-Testing AI Values Prioritization with AIRiskDilemmas}, 
+      author={Yu Ying Chiu and Zhilin Wang and Sharan Maiya and Yejin Choi and Kyle Fish and Sydney Levine and Evan Hubinger},
+      year={2025},
+      eprint={2505.14633},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2505.14633}, 
+}
 ```
