@@ -68,7 +68,8 @@ def visualize_bootstrap_scores(df, title):
     bars = pd.DataFrame(dict(
         lower = df.quantile(.025),
         rating = df.quantile(.5),
-        upper = df.quantile(.975))).reset_index(names="model").sort_values("rating", ascending=False)
+        upper = df.quantile(.975))).reset_index().rename(columns={'index': 'model'}).sort_values("rating", ascending=False)
+
 
     bars['error_y'] = bars['upper'] - bars["rating"]
     bars['error_y_minus'] = bars['rating'] - bars["lower"]
