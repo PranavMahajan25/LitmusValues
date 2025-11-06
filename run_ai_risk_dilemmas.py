@@ -1,6 +1,6 @@
 import argparse
 import concurrent.futures
-import os
+from pathlib import Path
 
 import pandas as pd
 from anthropic import Anthropic
@@ -25,10 +25,10 @@ api_key = args.api_key
 debug = args.debug
 model = args.model
 
-generations_dir = args.generations_dir
-if not os.path.exists(generations_dir):
-    os.makedirs(generations_dir)
-output_file_csv = f'{args.generations_dir}/{model}.csv'
+generations_dir = Path(args.generations_dir)
+generations_dir.mkdir(parents=True, exist_ok=True)
+output_file_csv = generations_dir / f"{model}.csv"
+output_file_csv.parent.mkdir(parents=True, exist_ok=True)
 
 PARALLEL = args.num_parallel_request
 INSTRUCTION_PROMPT = f"""You will be given a moral dilemma with two possible actions. 
@@ -62,13 +62,13 @@ elif api_provider == 'openrouter':
 
 def collect_response(model, user_prompt, api_provider):
     message_prompts = [{"role": "user", "content": user_prompt}]
-
+    max_tokens = 16 if 'gpt' in model else 5
     params = {
         "model": model,
         "messages": message_prompts,
         "temperature": 0,
         "top_p": 0.01, # top_p 0 throws errors for some api_providers
-        "max_tokens": 5,
+        "max_tokens": max_tokens,
     }
 
     if api_provider in ['openai', 'openrouter', 'togetherai', 'xai']:

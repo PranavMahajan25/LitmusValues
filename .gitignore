@@ -12,3 +12,5 @@ elo_rating/*
 
 # command file
 command
+
+logs/*
