@@ -29,7 +29,8 @@ parser.add_argument("--generations_dir", "-g", default="generations_stated")
 parser.add_argument("--elo_rating_dir", "-e", default="elo_rating_stated")
 args = parser.parse_args()
 
-model = args.model
+model : str = args.model
+model = model.replace('/','__')
 generations_dir = args.generations_dir
 elo_rating_dir = args.elo_rating_dir
 

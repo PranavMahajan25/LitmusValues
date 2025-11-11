@@ -1,7 +1,7 @@
 import argparse
 import ast
-import os
 from collections import defaultdict
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -17,14 +17,14 @@ args = parser.parse_args()
 
 model = args.model
 
-generations_dir = args.generations_dir
-elo_rating_dir = args.elo_rating_dir
+generations_dir = Path(args.generations_dir)
+elo_rating_dir = Path(args.elo_rating_dir)
 
-if not os.path.exists(elo_rating_dir):
-    os.makedirs(elo_rating_dir)
+elo_rating_dir.mkdir(parents=True, exist_ok=True)
 
-input_eval_dilemma_file = f"{generations_dir}/{model}.csv"
-elo_rating_path = f"{elo_rating_dir}/{model}.csv"
+input_eval_dilemma_file = generations_dir / f"{model}.csv"
+elo_rating_path = elo_rating_dir / f"{model}.csv"
+elo_rating_path.parent.mkdir(parents=True, exist_ok=True)
 
 def compute_online_linear_elo(battle_df, K=4, SCALE=400, BASE=10,INIT_RATING=1000):
     # Step 3) calculate the elo rating. Here have two algorithms to compute. One is linear and another is the linear regression (mle)

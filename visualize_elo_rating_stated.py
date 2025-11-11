@@ -29,7 +29,8 @@ parser.add_argument("--output_win_rate_fig_dir","-w", default="output_win_rate_f
 parser.add_argument("--max_values_to_show", type=int, default=30, help="Max number of value classes to include in the win-rate heatmap")
 args = parser.parse_args()
 
-model = args.model
+model : str = args.model
+model = model.replace('/', '__')
 elo_rating_dir = args.elo_rating_dir
 output_elo_fig_dir = args.output_elo_fig_dir
 output_win_rate_fig_dir = args.output_win_rate_fig_dir
