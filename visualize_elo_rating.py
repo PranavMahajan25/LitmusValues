@@ -31,6 +31,12 @@ if not os.path.exists(output_win_rate_fig_dir):
 input_eval_dilemma_file = f"{generations_dir}/{model}.csv"
 output_elo_fig_path = f"{output_elo_fig_dir}/{model}.png"
 output_win_rate_fig_path = f"{output_win_rate_fig_dir}/{model}.png"
+elo_fig_parent_dir = os.path.dirname(output_elo_fig_path)
+win_rate_parent_dir = os.path.dirname(output_win_rate_fig_path)
+if elo_fig_parent_dir:
+    os.makedirs(elo_fig_parent_dir, exist_ok=True)
+if win_rate_parent_dir:
+    os.makedirs(win_rate_parent_dir, exist_ok=True)
 
 def compute_online_linear_elo(battle_df, K=4, SCALE=400, BASE=10,INIT_RATING=1000):
     # Step 3) calculate the elo rating. Here have two algorithms to compute. One is linear and another is the linear regression (mle)
@@ -68,8 +74,7 @@ def visualize_bootstrap_scores(df, title):
     bars = pd.DataFrame(dict(
         lower = df.quantile(.025),
         rating = df.quantile(.5),
-        upper = df.quantile(.975))).reset_index().rename(columns={'index': 'model'}).sort_values("rating", ascending=False)
-
+        upper = df.quantile(.975))).reset_index(names="model").sort_values("rating", ascending=False)
 
     bars['error_y'] = bars['upper'] - bars["rating"]
     bars['error_y_minus'] = bars['rating'] - bars["lower"]
