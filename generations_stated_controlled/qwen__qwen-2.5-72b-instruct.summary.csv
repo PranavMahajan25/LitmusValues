@@ -1,0 +1,2 @@
+model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
+qwen/qwen-2.5-72b-instruct,1200,342,247,95,178,661,19,14.833,55.083

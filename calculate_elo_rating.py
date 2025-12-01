@@ -22,8 +22,13 @@ elo_rating_dir = Path(args.elo_rating_dir)
 
 elo_rating_dir.mkdir(parents=True, exist_ok=True)
 
-input_eval_dilemma_file = generations_dir / f"{model}.csv"
-elo_rating_path = elo_rating_dir / f"{model}.csv"
+# Fix sanitization logic to replace only `/` and spaces with double underscores
+sanitized_model = model.replace('/', '__').replace(' ', '__')
+
+# Update file paths to use the corrected sanitized model name
+input_eval_dilemma_file = generations_dir / f"{sanitized_model}.csv"
+elo_rating_path = elo_rating_dir / f"{sanitized_model}.csv"
+
 elo_rating_path.parent.mkdir(parents=True, exist_ok=True)
 
 def compute_online_linear_elo(battle_df, K=4, SCALE=400, BASE=10,INIT_RATING=1000):

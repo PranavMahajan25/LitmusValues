@@ -1,0 +1,2 @@
+model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
+anthropic/claude-sonnet-4,1200,338,140,198,150,708,4,12.5,59.0

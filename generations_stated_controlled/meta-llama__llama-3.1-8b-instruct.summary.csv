@@ -1,0 +1,2 @@
+model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
+meta-llama/llama-3.1-8b-instruct,1200,856,505,351,177,17,150,14.75,1.417

@@ -1,0 +1,2 @@
+model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
+google/gemma-3-12b-it,1200,517,233,284,249,413,21,20.75,34.417

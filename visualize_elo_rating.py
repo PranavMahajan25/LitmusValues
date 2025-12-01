@@ -28,9 +28,13 @@ if not os.path.exists(output_elo_fig_dir):
 if not os.path.exists(output_win_rate_fig_dir):
     os.makedirs(output_win_rate_fig_dir)
 
-input_eval_dilemma_file = f"{generations_dir}/{model}.csv"
-output_elo_fig_path = f"{output_elo_fig_dir}/{model}.png"
-output_win_rate_fig_path = f"{output_win_rate_fig_dir}/{model}.png"
+# Apply consistent sanitization logic to replace `/` and spaces with double underscores
+sanitized_model = model.replace('/', '__').replace(' ', '__')
+
+# Update file paths to use the sanitized model name
+input_eval_dilemma_file = f"{generations_dir}/{sanitized_model}.csv"
+output_elo_fig_path = f"{output_elo_fig_dir}/{sanitized_model}.png"
+output_win_rate_fig_path = f"{output_win_rate_fig_dir}/{sanitized_model}.png"
 elo_fig_parent_dir = os.path.dirname(output_elo_fig_path)
 win_rate_parent_dir = os.path.dirname(output_win_rate_fig_path)
 if elo_fig_parent_dir:
