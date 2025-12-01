@@ -1,2 +1,4 @@
-model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
-google/gemma-3-4b-it,1200,586,134,452,312,302,0,26.0,25.167
+category,count,percentage
+binary,876,36.5
+equal,319,13.29
+depends,1205,50.21

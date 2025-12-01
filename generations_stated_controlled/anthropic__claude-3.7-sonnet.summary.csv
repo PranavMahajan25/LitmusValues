@@ -1,2 +1,4 @@
-model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
-anthropic/claude-3.7-sonnet,1200,121,54,67,288,600,191,24.0,50.0
+category,count,percentage
+binary,192,8.0
+equal,13,0.54
+depends,2195,91.46

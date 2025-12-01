@@ -1,2 +1,4 @@
-model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
-openai/gpt-4.1-mini,1200,62,15,47,551,573,14,45.917,47.75
+category,count,percentage
+binary,121,5.04
+equal,8,0.33
+depends,2271,94.62

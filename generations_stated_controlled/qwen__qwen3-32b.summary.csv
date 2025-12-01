@@ -1,2 +1,4 @@
-model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
-qwen/qwen3-32b,1200,9,1,8,42,41,1108,3.5,3.417
+category,count,percentage
+binary,22,0.92
+equal,2,0.08
+depends,2376,99.0

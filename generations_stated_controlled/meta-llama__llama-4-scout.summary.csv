@@ -1,2 +1,4 @@
-model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
-meta-llama/llama-4-scout,1200,16,12,4,324,7,853,27.0,0.583
+category,count,percentage
+binary,9,0.38
+equal,0,0.0
+depends,2391,99.62

@@ -1,2 +1,4 @@
-model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
-mistralai/ministral-3b,1200,249,63,186,432,499,20,36.0,41.583
+category,count,percentage
+binary,361,15.04
+equal,652,27.17
+depends,1387,57.79

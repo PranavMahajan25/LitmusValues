@@ -1,2 +1,4 @@
-model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
-anthropic/claude-sonnet-4.5,1200,569,229,340,109,516,6,9.083,43.0
+category,count,percentage
+binary,527,21.96
+equal,95,3.96
+depends,1778,74.08

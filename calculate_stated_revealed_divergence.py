@@ -13,6 +13,7 @@ from pathlib import Path
 from scipy.stats import spearmanr, kendalltau
 import matplotlib.pyplot as plt
 import seaborn as sns
+import argparse
 
 def load_preferences(elo_rating_dir):
     """Load preference rankings from CSV files"""
@@ -81,8 +82,16 @@ def calculate_divergence_metrics(stated_ranks, revealed_ranks):
 
 
 def main():
+    # Add argument for controlled stated preferences
+    parser = argparse.ArgumentParser(description='Calculate divergence between stated and revealed preferences')
+    parser.add_argument('--controlled', action='store_true', help='Use controlled stated preferences')
+    args = parser.parse_args()
+
+    # Determine input directory based on the controlled flag
+    stated_dir = "elo_rating_stated_controlled" if args.controlled else "elo_rating_stated"
+
     # Load stated and revealed preferences
-    stated_prefs = load_stated_preferences("elo_rating_stated")
+    stated_prefs = load_stated_preferences(stated_dir)
     revealed_prefs = load_revealed_preferences("elo_rating")
     
     print(f"\nLoaded {len(stated_prefs)} models with stated preferences")
@@ -133,16 +142,17 @@ def main():
     results_df = results_df.sort_values('spearman_rho')
     
     # Save results
-    results_df.to_csv('stated_revealed_divergence.csv', index=False)
-    print(f"\n\nSummary saved to 'stated_revealed_divergence.csv'")
+    output_csv = "stated_revealed_divergence_controlled.csv" if args.controlled else "stated_revealed_divergence.csv"
+    results_df.to_csv(output_csv, index=False)
+    print(f"\n\nSummary saved to '{output_csv}'")
     
     # Create visualizations
-    create_visualizations(results_df)
+    create_visualizations(results_df, args.controlled)
     
     return results_df
 
 
-def create_visualizations(results_df):
+def create_visualizations(results_df, controlled):
     """Create visualizations of divergence metrics"""
     
     # Set style
@@ -224,14 +234,15 @@ def create_visualizations(results_df):
              bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.3))
     
     plt.tight_layout()
-    plt.savefig('stated_revealed_divergence_summary.png', dpi=300, bbox_inches='tight')
-    print(f"Visualization saved to 'stated_revealed_divergence_summary.png'")
+    output_summary_png = "stated_revealed_divergence_summary_controlled.png" if controlled else "stated_revealed_divergence_summary.png"
+    plt.savefig(output_summary_png, dpi=300, bbox_inches='tight')
+    print(f"Visualization saved to '{output_summary_png}'")
     
     # Figure 2: Heatmap of rank differences by model and value
-    create_heatmap(results_df)
+    create_heatmap(results_df, controlled)
 
 
-def create_heatmap(results_df):
+def create_heatmap(results_df, controlled):
     """Create a heatmap showing rank differences for each model and value"""
     
     stated_prefs = load_stated_preferences("elo_rating_stated")

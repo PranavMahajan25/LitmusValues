@@ -1,2 +1,4 @@
-model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
-meta-llama/llama-4-maverick,1200,46,46,0,297,2,855,24.75,0.167
+category,count,percentage
+binary,8,0.33
+equal,2,0.08
+depends,2390,99.58

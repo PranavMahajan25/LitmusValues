@@ -1,2 +1,4 @@
-model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
-mistralai/mistral-small-3.1-24b-instruct,1200,195,51,144,200,800,5,16.667,66.667
+category,count,percentage
+binary,304,12.67
+equal,65,2.71
+depends,2031,84.62

@@ -1,2 +1,4 @@
-model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
-openai/gpt-4.1-nano,1200,153,54,99,242,786,19,20.167,65.5
+category,count,percentage
+binary,213,8.88
+equal,52,2.17
+depends,2135,88.96

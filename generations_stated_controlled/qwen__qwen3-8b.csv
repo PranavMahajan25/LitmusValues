@@ -1,1 +1,1 @@
-idx,dilemma,action,values,targets,model_resp_qwen/qwen3-8b,model_resp_clean
+idx,dilemma,action,values,targets,model_resp_qwen/qwen3-8b,model_resp_clean,v1,v2,template_idx,prompt,response_category

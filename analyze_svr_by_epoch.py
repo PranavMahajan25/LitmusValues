@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import spearmanr, pearsonr
+import argparse
 
 # Epoch Capabilities Index scores - ONLY models with actual scores from the index
 # Source: https://epochai.org/data/epoch-ai-capabilities-index
@@ -46,9 +47,9 @@ EPOCH_SCORES = {
 }
 
 
-def load_divergence_data():
+def load_divergence_data(input_csv):
     """Load the stated-revealed divergence analysis"""
-    df = pd.read_csv('stated_revealed_divergence.csv')
+    df = pd.read_csv(input_csv)
     
     # Add Epoch Capabilities Index scores
     df['epoch_score'] = df['model'].map(EPOCH_SCORES)
@@ -108,7 +109,7 @@ def analyze_correlation(df):
     return df
 
 
-def create_visualizations(df):
+def create_visualizations(df, output_png):
     """Create simple visualization with just Spearman's ρ"""
     
     # Set style
@@ -176,13 +177,13 @@ def create_visualizations(df):
     ax.legend(handles=legend_elements, loc='upper left', fontsize=11, framealpha=0.9)
     
     plt.tight_layout()
-    plt.savefig('svr_gap_by_epoch.png', dpi=300, bbox_inches='tight')
-    print("\n✓ Visualization saved to: svr_gap_by_epoch.png")
+    plt.savefig(output_png, dpi=300, bbox_inches='tight')
+    print(f"\n✓ Visualization saved to: {output_png}")
     
     return fig
 
 
-def create_summary_table(df):
+def create_summary_table(df, output_csv):
     """Create a summary table sorted by Epoch score"""
     summary = df[['model', 'epoch_score', 'spearman_rho', 'mean_abs_rank_diff']].copy()
     summary = summary.sort_values('epoch_score', ascending=False)
@@ -199,8 +200,8 @@ def create_summary_table(df):
     print(summary.to_string(index=False))
     
     # Save to CSV
-    summary.to_csv('svr_gap_by_epoch_summary.csv', index=False)
-    print("\n✓ Summary table saved to: svr_gap_by_epoch_summary.csv")
+    summary.to_csv(output_csv, index=False)
+    print(f"\n✓ Summary table saved to: {output_csv}")
     
     return summary
 
@@ -211,8 +212,18 @@ def main():
     print("="*80)
     print("Source: https://epochai.org/data/epoch-ai-capabilities-index")
     
+    # Add argument for controlled divergence analysis
+    parser = argparse.ArgumentParser(description='Analyze SvR preference gap by Epoch Capabilities Index')
+    parser.add_argument('--controlled', action='store_true', help='Use controlled divergence data')
+    args = parser.parse_args()
+
+    # Determine input and output filenames based on the controlled flag
+    input_csv = "stated_revealed_divergence_controlled.csv" if args.controlled else "stated_revealed_divergence.csv"
+    output_csv = "svr_gap_by_epoch_summary_controlled.csv" if args.controlled else "svr_gap_by_epoch_summary.csv"
+    output_png = "svr_gap_by_epoch_controlled.png" if args.controlled else "svr_gap_by_epoch.png"
+    
     # Load data
-    df = load_divergence_data()
+    df = load_divergence_data(input_csv)
     
     print(f"\nLoaded {len(df)} models with both SvR divergence and Epoch scores")
     print(f"Epoch score range: {df['epoch_score'].min():.0f} - {df['epoch_score'].max():.0f}")
@@ -221,10 +232,10 @@ def main():
     df = analyze_correlation(df)
     
     # Create visualizations
-    create_visualizations(df)
+    create_visualizations(df, output_png)
     
     # Create summary table
-    create_summary_table(df)
+    create_summary_table(df, output_csv)
     
     print("\n" + "="*80)
     print("KEY FINDINGS")

@@ -1,2 +1,4 @@
-model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
-anthropic/claude-haiku-4.5,1200,478,302,176,165,465,92,13.75,38.75
+category,count,percentage
+binary,71,2.96
+equal,9,0.38
+depends,2320,96.67

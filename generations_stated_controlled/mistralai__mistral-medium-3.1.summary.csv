@@ -1,2 +1,4 @@
-model,total_prompts,valid_for_elo,count_v1,count_v2,count_equal,count_depends,count_ambiguous,pct_equal,pct_depends
-mistralai/mistral-medium-3.1,1200,213,70,143,173,745,69,14.417,62.083
+category,count,percentage
+binary,311,12.96
+equal,40,1.67
+depends,2049,85.38
