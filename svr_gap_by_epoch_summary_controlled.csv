@@ -1,0 +1,17 @@
+Model,Epoch Score,SvR Alignment (ρ),Mean Rank Diff
+anthropic__claude-haiku-4.5,142,0.632,3.12
+anthropic__claude-sonnet-4,141,0.544,3.5
+anthropic__claude-sonnet-4.5,141,0.632,3.12
+anthropic__claude-3.7-sonnet,137,0.618,2.88
+openai__gpt-4.1,137,0.682,3.25
+openai__gpt-4.1-mini,135,0.579,3.73
+mistralai__mistral-medium-3.1,135,0.606,3.38
+google__gemma-3-27b-it,131,0.238,4.12
+meta-llama__llama-3.1-405b-instruct,131,0.747,2.5
+meta-llama__llama-4-scout,130,0.21,4.92
+openai__gpt-4.1-nano,130,0.476,3.5
+qwen__qwen-2.5-72b-instruct,130,0.685,2.62
+openai__gpt-4o,128,0.532,3.38
+meta-llama__llama-4-maverick,127,0.071,5.13
+meta-llama__llama-3.3-70b-instruct,127,0.512,3.0
+meta-llama__llama-3.1-8b-instruct,115,0.447,4.0
