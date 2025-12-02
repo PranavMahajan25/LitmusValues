@@ -68,17 +68,17 @@ run_for_model() {
   echo "▶ Model: $model"
   echo "────────────────────────────────────────"
 
-  # # 1) AI Risk Dilemmas (Revealed Preferences)
-  # echo "[${model}] Running run_ai_risk_dilemmas.py..."
-  # python run_ai_risk_dilemmas.py \
-  #   --api_provider openrouter \
-  #   --model "$model" \
-  #   --api_key "$OPENROUTER_API_KEY" \
-  #   --num_parallel_request "$NUM_PARALLEL_REQUEST" \
-  #   --generations_dir "$GENERATIONS_REVEALED_DIR" \
-  #   2>&1 | tee "logs/${safe}_ai_risk_dilemmas.log"
-  # status1=${PIPESTATUS[0]}
-
+  # 1) AI Risk Dilemmas (Revealed Preferences)
+  echo "[${model}] Running run_ai_risk_dilemmas.py..."
+  python run_ai_risk_dilemmas.py \
+    --api_provider openrouter \
+    --model "$model" \
+    --api_key "$OPENROUTER_API_KEY" \
+    --num_parallel_request "$NUM_PARALLEL_REQUEST" \
+    --generations_dir "$GENERATIONS_REVEALED_DIR" \
+    2>&1 | tee "logs/${safe}_ai_risk_dilemmas.log"
+  status1=${PIPESTATUS[0]}
+  
   # 2) Stated Preferences
   echo "[${model}] Running $STATED_PREFS_SCRIPT..."
   if [[ "$WITH_DEFINITIONS" == "with_definitions" ]]; then

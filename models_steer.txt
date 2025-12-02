@@ -1,0 +1,15 @@
+meta-llama/llama-3.1-8b-instruct
+meta-llama/llama-3.3-70b-instruct
+meta-llama/llama-3.1-405b-instruct
+meta-llama/llama-4-scout
+meta-llama/llama-4-maverick
+openai/gpt-4.1-mini
+openai/gpt-4.1
+openai/gpt-4.1-nano
+openai/gpt-4o
+anthropic/claude-sonnet-4.5
+anthropic/claude-sonnet-4
+anthropic/claude-haiku-4.5
+anthropic/claude-3.7-sonnet
+
+
